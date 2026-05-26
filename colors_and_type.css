@@ -1,0 +1,443 @@
+/* ============================================================
+   TRAVERTINE INTERIOR — colors_and_type.css  (v1.2)
+   Single source of truth for tokens. Import in any artifact:
+   <link rel="stylesheet" href="colors_and_type.css">
+   ============================================================ */
+
+/* ---- WEB FONT (BODY) — IBM Plex Sans Thai via Google Fonts ----
+   Loads body family for long-form Thai+English content.
+   Local fallback uses FC Subject already defined below. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ---- LOCAL FONT FACES ---------------------------------------- */
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-Thin.otf") format("opentype");        font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-ExtraLight.otf") format("opentype");  font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-Light.otf") format("opentype");       font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-Regular.otf") format("opentype");     font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-Medium.otf") format("opentype");      font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-SemiBold.otf") format("opentype");    font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-Bold.otf") format("opentype");        font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-Heavy.otf") format("opentype");       font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "FC Subject"; src: url("fonts/FCSubject-Black.otf") format("opentype");       font-weight: 900; font-style: normal; font-display: swap; }
+
+@font-face { font-family: "Acherus Grotesque"; src: url("fonts/AcherusGrotesque-Regular.otf") format("opentype");        font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Acherus Grotesque"; src: url("fonts/AcherusGrotesque-RegularItalic.otf") format("opentype"); font-weight: 400; font-style: italic; font-display: swap; }
+
+/* ---- TOKENS -------------------------------------------------- */
+:root {
+  /* COLORS — warm grey, travertine tone. White and black are forbidden. */
+  --tv-grey-1:  #d7d2cb;  /* ivory — accent surface */
+  --tv-grey-2:  #cbc4bc;  /* beige — deeper accent surface */
+  --tv-grey-5:  #aca39a;  /* mid — dividers, captions */
+  --tv-grey-7:  #968c83;  /* accent, secondary text */
+  --tv-grey-10: #796e65;  /* dark warm grey — default heading on light */
+  --tv-near-black: #2b2218;  /* body text, high-emphasis ink */
+
+  /* SEMANTIC SURFACES */
+  --bg-paper:      #fafafa;            /* off-white — paper-like, primary page background */
+  --bg:            var(--bg-paper);    /* alias — default page background */
+  --bg-warm:       var(--tv-grey-1);   /* ivory accent surface */
+  --bg-beige:      var(--tv-grey-2);   /* beige accent surface */
+  --surface:       var(--bg-paper);
+  --surface-deep:  var(--tv-grey-10);  /* inverted surface */
+
+  /* SEMANTIC INK */
+  --fg:                var(--tv-near-black);  /* body */
+  --fg-strong:         var(--tv-near-black);  /* high-emphasis heading / display */
+  --fg-heading:        var(--tv-grey-10);     /* default heading — editorial soft */
+  --fg-heading-muted:  var(--tv-grey-10);     /* alias of --fg-heading */
+  --fg-link:           var(--tv-grey-10);     /* clickable text — pair with underline */
+  --fg-muted:          var(--tv-grey-7);      /* secondary text */
+  --fg-faint:          var(--tv-grey-7);      /* captions, metadata */
+  --fg-on-deep:        var(--tv-grey-1);      /* text on dark surfaces — large text only */
+
+  /* HAIRLINES */
+  --rule:          var(--tv-grey-5);
+  --rule-faint:    color-mix(in oklab, var(--tv-grey-5) 50%, var(--tv-grey-1));
+  --hairline:      1px solid var(--rule);
+  --hairline-faint: 1px solid var(--rule-faint);
+
+  /* ---- TYPOGRAPHY FAMILIES ----------------------------------
+     v1.2 — Hybrid pairing:
+       Display / headings → FC Subject  (editorial elegance, Light/Thin)
+       Body / long-form   → IBM Plex Sans Thai  (Thai + English match perfectly)
+       Labels / captions  → Acherus Grotesque  (ALL-CAPS tracked, EN only)
+       Numerals / mono    → IBM Plex Mono  (BOQ codes, dimensions, dates)
+  */
+  --font-display:  "FC Subject", "IBM Plex Sans Thai", system-ui, sans-serif;
+  --font-body:     "IBM Plex Sans Thai", "FC Subject", "Noto Sans Thai", system-ui, sans-serif;
+  --font-label:    "Acherus Grotesque", "IBM Plex Sans Thai", system-ui, sans-serif;
+  --font-mono:     "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* TYPE SCALE — editorial, generous */
+  --fs-display-xl: 96px;   /* hero display */
+  --fs-display-l:  72px;
+  --fs-display:    56px;   /* slide title */
+  --fs-h1:         44px;
+  --fs-h2:         32px;
+  --fs-h3:         24px;
+  --fs-h4:         18px;
+  --fs-body-lg:    18px;
+  --fs-body:       16px;
+  --fs-body-sm:    14px;
+  --fs-caption:    12px;
+  --fs-label:      11px;   /* tracked all-caps labels */
+
+  /* LINE HEIGHTS */
+  --lh-tight:   1.05;
+  --lh-display: 1.1;
+  --lh-snug:    1.25;
+  --lh-body:    1.6;    /* nudged from 1.55 → 1.6 for Plex Sans Thai readability */
+  --lh-body-th: 1.85;   /* Thai body — slightly looser for diacritics */
+  --lh-loose:   1.75;
+
+  /* TRACKING */
+  --ls-display:     -0.01em;
+  --ls-body:        0;
+  --ls-label-tight: 0.12em;   /* Acherus caps — minimum */
+  --ls-label:       0.18em;   /* Acherus caps — default */
+  --ls-label-wide:  0.20em;   /* Acherus caps — maximum */
+
+  /* SPACING — 4px base */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  /* MARGINS — editorial pages */
+  --page-margin-x: 96px;
+  --page-margin-y: 72px;
+
+  /* RADII — sharp by default. Imagery never rounded. */
+  --radius-0: 0;
+  --radius-1: 1px;     /* effectively flat — for buttons/inputs only */
+  --radius-2: 2px;
+
+  /* MOTION */
+  --ease-out:    cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:    140ms;
+  --dur-base:    240ms;
+  --dur-slow:    420ms;
+
+  /* OPACITY STATES (no shadows; quiet hover) */
+  --hover-darken: rgba(43, 34, 24, 0.06);
+  --press-darken: rgba(43, 34, 24, 0.10);
+}
+
+/*
+  BACKGROUND SYSTEM
+  -----------------
+  --bg-paper  #fafafa  off-white. DEFAULT page background. Use for slides,
+                       content blocks, BOQ pages, mood boards.
+  --bg-warm   #d7d2cb  ivory. Use as ACCENT surface (section openers,
+                       project cards, swatches), never as default page bg.
+  --bg-beige  #cbc4bc  beige. Use as DEEPER accent surface (callout blocks,
+                       material swatches), never as default page bg.
+  --surface-deep #796e65  inverted block. Use sparingly for highlights.
+
+  INK SYSTEM
+  ----------
+  --fg              body text (--tv-near-black, ~14:1 on paper)
+  --fg-strong       high-emphasis heading / display title (--tv-near-black)
+  --fg-heading      DEFAULT heading on light — editorial soft (--tv-grey-10, ~5.3:1)
+  --fg-muted        secondary text, labels (--tv-grey-7)
+  --fg-on-deep      text on --surface-deep — LARGE TEXT ONLY (contrast ~3.2:1)
+
+  TYPE SYSTEM (v1.2)
+  ------------------
+  HEADINGS  → FC Subject (Thin 100 / Light 300) — editorial, elegant
+  BODY      → IBM Plex Sans Thai (Light 300 / Regular 400) — Thai+EN match
+  LABELS    → Acherus Grotesque (Regular 400) — ALL-CAPS tracked, English only
+  MONO      → IBM Plex Mono — BOQ codes, dimensions, dates
+*/
+
+/* ---- SEMANTIC ELEMENT STYLES --------------------------------- */
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);    /* IBM Plex Sans Thai */
+  font-size: var(--fs-body);
+  font-weight: 300;                 /* editorial default = Light */
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* DISPLAY — FC Subject Light/Thin at large sizes. Uses --fg-strong for full presence. */
+.display, .display-xl {
+  font-family: var(--font-display);   /* FC Subject */
+  font-weight: 300;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--fg-strong);
+  text-wrap: balance;
+}
+.display-xl { font-size: var(--fs-display-xl); font-weight: 200; }
+.display-l  { font-size: var(--fs-display-l);  font-weight: 300; }
+
+/* HEADINGS — FC Subject, editorial soft by default.
+   For high-contrast titles, add class .display or override color: var(--fg-strong). */
+h1 { font-family: var(--font-display); font-weight: 300; font-size: var(--fs-h1); line-height: var(--lh-tight); letter-spacing: var(--ls-display); color: var(--fg-heading); margin: 0; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); line-height: var(--lh-snug);  color: var(--fg-heading); margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h3); line-height: var(--lh-snug);  color: var(--fg-heading); margin: 0; }
+h4 { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h4); line-height: var(--lh-snug);  color: var(--fg-heading); margin: 0; }
+
+/* BODY PARAGRAPH — IBM Plex Sans Thai inherited from html/body */
+p  { margin: 0; max-width: 62ch; text-wrap: pretty; }
+
+/* SECTION LABEL — Acherus, ALL CAPS, tracked */
+.label,
+.eyebrow {
+  font-family: var(--font-label);
+  font-weight: 400;
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* CAPTION — small italic, English */
+.caption {
+  font-family: var(--font-label);
+  font-style: italic;
+  font-size: var(--fs-caption);
+  color: var(--fg-faint);
+  letter-spacing: 0;
+}
+
+/* THAI BODY — slightly looser line height for Thai script */
+.th, [lang="th"] {
+  font-family: var(--font-body);    /* IBM Plex Sans Thai */
+  font-weight: 400;
+  line-height: var(--lh-body-th);
+}
+
+/* BILINGUAL PAIR */
+.bilingual { display: flex; flex-direction: column; gap: var(--sp-2); }
+.bilingual .th { color: var(--fg); }
+.bilingual .en {
+  font-family: var(--font-label);
+  font-style: italic;
+  font-size: var(--fs-body-sm);
+  color: var(--fg-muted);
+  letter-spacing: 0;
+}
+
+/* HAIRLINE RULE */
+hr, .rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: var(--sp-6) 0;
+}
+
+/* LINK */
+a {
+  color: var(--fg-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  border-bottom: 0;
+  transition: color var(--dur-base) var(--ease-out), text-decoration-color var(--dur-base) var(--ease-out);
+}
+a:hover { color: var(--fg-strong); text-decoration-color: var(--fg-strong); }
+
+/* MONO — for BOQ codes, dimensions, dates */
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  letter-spacing: 0;
+  color: var(--fg);
+}
+
+/* SELECTION */
+::selection { background: var(--tv-grey-7); color: var(--tv-grey-1); }
+
+/* ---- PRESENTATION LAYOUTS ----------------------------------- */
+
+/* Slide container — landscape A4 16:9 */
+.slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-paper);
+  color: var(--fg);
+  padding: var(--page-margin-y) var(--page-margin-x);
+  position: relative;
+  page-break-inside: avoid;
+  box-sizing: border-box;
+}
+
+/* Hero slide — centered, display-xl title */
+.slide.hero {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.slide.hero .title {
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-display);
+  color: var(--fg-strong);
+  margin: 0;
+}
+
+/* Content slide — title + body */
+.slide.content {
+  justify-content: flex-start;
+}
+.slide.content .title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  color: var(--fg-heading);
+  margin: 0 0 var(--sp-8) 0;
+}
+.slide.content .body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+/* Section divider slide */
+.slide.section {
+  justify-content: center;
+  align-items: center;
+  background: var(--surface-deep);
+}
+.slide.section .title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--fs-display-l);
+  line-height: var(--lh-display);
+  color: var(--fg-on-deep);
+  text-align: center;
+  margin: 0;
+}
+
+/* Closing slide — tagline + footer */
+.slide.closing {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-8);
+}
+.slide.closing .tagline {
+  font-family: var(--font-label);
+  font-size: var(--fs-body);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin: 0;
+}
+
+/* Slide footer — page number + metadata */
+.slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: auto;
+  padding-top: var(--sp-6);
+  border-top: var(--hairline);
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* Slide number */
+.slide-number {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+  color: var(--fg-faint);
+}
+
+/* Two-column layout for content */
+.slide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-7);
+  align-items: start;
+  flex: 1;
+}
+
+/* Image block — sharp edges, full bleed option */
+.slide-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+}
+.slide-image.full-bleed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Overlay for bleed images */
+.slide.with-bleed {
+  position: relative;
+}
+.slide.with-bleed .content {
+  position: relative;
+  z-index: 1;
+  background: rgba(250, 250, 250, 0.95);
+  padding: var(--sp-8);
+  border-radius: 0;
+}
+
+/* Bilingual slide content */
+.slide-bilingual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.slide-bilingual .th {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body-th);
+  color: var(--fg);
+}
+.slide-bilingual .en {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body);
+  color: var(--fg-muted);
+  font-style: italic;
+}
+
+/* @media print — slide deck */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+    padding: 0;
+  }
+
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}
